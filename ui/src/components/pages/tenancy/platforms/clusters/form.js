@@ -15,7 +15,7 @@ import Cookies from 'js-cookie';
 
 import { Error, Field, Form } from '../../../../utils';
 
-import { PlatformSchedulingModal } from '../scheduling';
+import { PlatformSchedulingModal, ScheduleEndDate } from '../scheduling';
 import { PlatformTypeCard } from '../utils';
 
 import { ClusterParameterField } from './parameter-field';
@@ -197,6 +197,10 @@ export const ClusterForm = ({
                 <PlatformSchedulingModal
                     useSchedulingData={() => useSchedulingData(tenancy.id, formState)}
                     onCancel={handleCancel}
+                    onConfirm={handleConfirm}
+                />
+            ) && (
+                <ScheduleEndDate
                     onConfirm={handleConfirm}
                 />
             )}

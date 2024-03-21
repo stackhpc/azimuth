@@ -73,20 +73,22 @@ const ProjectedQuotas = ({ quotas }) => {
     );
 };
 
-const ScheduleEndDate = () => {
+const ScheduleEndDate = ({ onConfirm }) => {
     return (
         <div>
-            <Form.Label htmlFor="scheduleDelete">Schedule delete for:</Form.Label>
-            <Form.Select id="scheduleDelete" aria-describedby="scheduleDeleteHelp">
-                <option value="1">End of today</option>
-                <option value="2">End of Tomorrow</option>
-                <option value="3">End of this Week</option>
-                <option value="4">End of next Week</option>
-                <option value="_never_">Never</option>
-            </Form.Select>
-            <Form.Text id="scheduleDeleteHelp" muted>
-            To help efficient use of resources, please delete your platform as soon as you are done.
-            </Form.Text>
+            <Form onSubmit={onConfirm}>
+                <Form.Label htmlFor="scheduleDelete">Schedule delete for:</Form.Label>
+                <Form.Select id="scheduleDelete" value={this.state.value} aria-describedby="scheduleDeleteHelp">
+                    <option value="1">End of today</option>
+                    <option value="2">End of Tomorrow</option>
+                    <option value="3">End of this Week</option>
+                    <option value="4">End of next Week</option>
+                    <option value="_never_">Never</option>
+                </Form.Select>
+                <Form.Text id="scheduleDeleteHelp" muted>
+                To help efficient use of resources, please delete your platform as soon as you are done.
+                </Form.Text>
+            </Form>
         </div>
     );
 };

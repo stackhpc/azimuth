@@ -18,6 +18,7 @@ from azimuth import utils
 
 
 CAAS_API_VERSION = "caas.azimuth.stackhpc.com/v1alpha1"
+SCHEDULE_API_VERSION = "scheduling.azimuth.stackhpc.com/v1alpha1"
 LOG = logging.getLogger(__name__)
 
 
@@ -178,6 +179,22 @@ def create_cluster(
             "spec": cluster_spec,
         }
     )
+    if end_date:
+        schedule_resource = client.api(SCHEDULE_API_VERSION).resource("schedules")
+        schedule = schedule_resource.create(
+            {
+                "metadata": {
+                    "name": safe_name,
+                    "ownerReferences": [],
+                },
+                "ref": {
+                    "apiVersion": "v1",
+                    "kind": "ConfigMap",
+                    "name": safe_name,
+                },
+                "notAfter": end_date,
+            }
+        )
     # TODO(johngarbutt): create schedule resource
     # adding the correct owner relationship,
     # if end date is specified
